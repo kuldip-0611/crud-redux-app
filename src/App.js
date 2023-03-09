@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CrudCard from './components/CrudCard';
+
+import EditForm from './components/EditForm';
+import ModalComponent from './components/ModalComponent';
+import { Button } from 'reactstrap';
+
 
 function App() {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CrudCard />
+     <EditForm />
+
+     {/* <ModalComponent /> */}
+
+
     </div>
   );
 }
