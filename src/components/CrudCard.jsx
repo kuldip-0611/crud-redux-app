@@ -22,11 +22,11 @@ import { AiOutlinePhone } from "react-icons/ai";
 import { AiOutlineLink } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import MyVerticallyCenteredModal from "./ModalComponent";
+import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
+import CardBox from "./CardBox";
 
 const CrudCard = () => {
   const userArray = useSelector((state) => state.user);
-  const [like,setLike] = useState();
  
 
   const dispatch = useDispatch();
@@ -35,66 +35,17 @@ const CrudCard = () => {
     dispatch(fetchUser());
   }, []);
 
+  const handleModal = (item) => {
+    // dispatch(editperticularForm(item));
+    // setModalShow(true);
+  };
+
   return (
     <>
       <Container>
         <Row>
           {userArray.users
-            ? userArray.users.map((item) => (
-                <Card
-                  className="m-3"
-                  key={item.id}
-                  style={{
-                    width: "18rem",
-                  }}
-                >
-                  <img
-                    alt="Sample"
-                    src={`https://avatars.dicebear.com/v2/avataaars/${item.username}.svg?options[mood][]=happy`}
-                  />
-                  <CardBody>
-                    <CardTitle tag="h5" className="text-start">
-                      {item.name}
-                    </CardTitle>
-                    <CardSubtitle
-                      className="mb-2 text-start text-muted"
-                      tag="h6"
-                    >
-                      <AiOutlineMail />
-                      {item.email}
-                    </CardSubtitle>
-                    <CardSubtitle
-                      className="mb-2 text-start text-muted"
-                      tag="h6"
-                    >
-                      <AiOutlinePhone />
-                      {item.phone}
-                    </CardSubtitle>
-                    <CardSubtitle
-                      className="mb-2 text-start text-muted"
-                      tag="h6"
-                    >
-                      <AiOutlineLink />
-                      {item.website}
-                    </CardSubtitle>
-
-                    <div className="d-flex justify-content-around mt-3">
-                      <Button value={like} onClick={()=>setLike(!like)}>
-                        {(like===false) ? <AiFillHeart /> : <AiOutlineHeart />}
-                      </Button>
-                      <Button>
-                        <AiFillEdit />
-                      </Button>
-                     
-                      <Button
-                        onClick={() => dispatch(removerPerticularUser(item.id))}
-                      >
-                        <AiFillDelete />
-                      </Button>
-                    </div>
-                  </CardBody>
-                </Card>
-              ))
+            ? userArray.users.map((item) => <CardBox item={item}/>)
             : "loading"}
         </Row>
       </Container>

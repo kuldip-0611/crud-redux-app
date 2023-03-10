@@ -30,10 +30,23 @@ const userSlice = createSlice({
         })
        },
        editperticularForm : (state,action)=>{
-        state.individualData = []
-        state.individualData.push(action.payload)
-        console.log(action.payload)
+        state.users.map((item)=>{
+            if(item.id === action.payload.user.id){
+                console.log('match');
+                
+                item.name = action.payload.user.name;
+                item.email = action.payload.user.email;
+                item.phone = action.payload.user.phone;
+                item.website = action.payload.user.website;
+               
+            }
+            else{
+                return null
+            }
+        })
+        
        }
+
 
     },
     extraReducers:(builder)=>{

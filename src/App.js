@@ -3,18 +3,24 @@ import './App.css';
 import CrudCard from './components/CrudCard';
 
 import EditForm from './components/EditForm';
-import ModalComponent from './components/ModalComponent';
+import MyVerticallyCenteredModal from './components/MyVerticallyCenteredModal';
 import { Button } from 'reactstrap';
+import FormUsinfFormik from './components/FormUsinfFormik';
+
 
 
 function App() {
   const [modalShow, setModalShow] = useState(false);
   return (
     <div className="App">
-      <CrudCard />
-     <EditForm />
+      {/* <CrudCard />
+      <EditForm /> */}
 
-     {/* <ModalComponent /> */}
+      <FormUsinfFormik />
+
+    
+      
+
 
 
     </div>
