@@ -10,16 +10,16 @@ import { Button } from 'reactstrap';
 
 
 function App() {
-  
+
   return (
     <div className="App">
       <CrudCard />
       <EditForm />
 
-     
 
-    
-      
+
+
+
 
 
 

@@ -40,6 +40,7 @@ const CardBox = (props) => {
         <img
           alt="Sample"
           src={`https://avatars.dicebear.com/v2/avataaars/${props.item.username}.svg?options[mood][]=happy`}
+          className='bg-light'
         />
         <CardBody>
           <CardTitle tag="h5" className="text-start mt-3">
@@ -58,7 +59,7 @@ const CardBox = (props) => {
             {props.item.website}
           </CardSubtitle>
 
-          <div className="d-flex justify-content-around mt-4 gap-5">
+          <div className="d-flex justify-content-around mt-4 gap-5 bg-light">
             <Button onClick={() => setLike(!like)}>
               {like === false ? <AiOutlineHeart /> : <AiFillHeart color="red" />}
             </Button>

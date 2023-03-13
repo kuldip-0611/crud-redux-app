@@ -10,9 +10,10 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button,
   Container,
+  Button,
   Row,
+  Col,
 } from "reactstrap";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
@@ -42,11 +43,13 @@ const CrudCard = () => {
 
   return (
     <>
-      <Container>
+      <Container className="container-fluid">
         <Row>
+         
           {userArray.users
             ? userArray.users.map((item) => <CardBox item={item}/>)
             : "loading"}
+         
         </Row>
       </Container>
     </>
