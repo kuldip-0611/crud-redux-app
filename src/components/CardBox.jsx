@@ -34,7 +34,7 @@ const CardBox = (props) => {
         className="m-3"
         key={props.item.id}
         style={{
-          width: "18rem",
+          width: "20rem",
         }}
       >
         <img
@@ -60,11 +60,11 @@ const CardBox = (props) => {
           </CardSubtitle>
 
           <div className="d-flex justify-content-around mt-4 gap-5 bg-light">
-            <Button onClick={() => setLike(!like)}>
-              {like === false ? <AiOutlineHeart /> : <AiFillHeart color="red" />}
+            <Button onClick={() => setLike(!like)} className='bg-light'>
+              {like === false ? <AiOutlineHeart color="black" /> : <AiFillHeart color="red" />}
             </Button>
-            <Button onClick={() => setModalShow(true)}>
-              <AiFillEdit />
+            <Button onClick={() => setModalShow(true)} className='bg-light'>
+              <AiFillEdit color="black" />
             </Button>
             <MyVerticallyCenteredModal
               show={modalShow}
@@ -73,9 +73,9 @@ const CardBox = (props) => {
             />
 
             <Button 
-              onClick={() => dispatch(removerPerticularUser(props.item.id))}
+              onClick={() => dispatch(removerPerticularUser(props.item.id))} className='bg-light'
             >
-              <AiFillDelete />
+              <AiFillDelete color="black" />
             </Button>
           </div>
         </CardBody>
