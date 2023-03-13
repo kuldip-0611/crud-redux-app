@@ -30,11 +30,6 @@ const CardBox = (props) => {
 
   return (
     <>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        item={props.item}
-      />
       <Card
         className="m-3"
         key={props.item.id}
@@ -47,31 +42,36 @@ const CardBox = (props) => {
           src={`https://avatars.dicebear.com/v2/avataaars/${props.item.username}.svg?options[mood][]=happy`}
         />
         <CardBody>
-          <CardTitle tag="h5" className="text-start">
+          <CardTitle tag="h5" className="text-start mt-3">
             {props.item.name}
           </CardTitle>
-          <CardSubtitle className="mb-2 text-start text-muted" tag="h6">
+          <CardSubtitle className="mb-2 text-start text-muted mt-3" tag="h6">
             <AiOutlineMail />
             {props.item.email}
           </CardSubtitle>
-          <CardSubtitle className="mb-2 text-start text-muted" tag="h6">
+          <CardSubtitle className="mb-2 text-start text-muted mt-3" tag="h6">
             <AiOutlinePhone />
             {props.item.phone}
           </CardSubtitle>
-          <CardSubtitle className="mb-2 text-start text-muted" tag="h6">
+          <CardSubtitle className="mb-2 text-start text-muted mt-3" tag="h6">
             <AiOutlineLink />
             {props.item.website}
           </CardSubtitle>
 
-          <div className="d-flex justify-content-around mt-3">
-            <Button  onClick={ () => setLike(!like) }>
-              {like === false ?   <AiOutlineHeart /> : <AiFillHeart />}
+          <div className="d-flex justify-content-around mt-4 gap-5">
+            <Button onClick={() => setLike(!like)}>
+              {like === false ? <AiOutlineHeart /> : <AiFillHeart color="red" />}
             </Button>
             <Button onClick={() => setModalShow(true)}>
               <AiFillEdit />
             </Button>
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              item={props.item}
+            />
 
-            <Button
+            <Button 
               onClick={() => dispatch(removerPerticularUser(props.item.id))}
             >
               <AiFillDelete />

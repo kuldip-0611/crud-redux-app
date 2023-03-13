@@ -30,20 +30,28 @@ const userSlice = createSlice({
         })
        },
        editperticularForm : (state,action)=>{
+
+        
         state.users.map((item)=>{
-            if(item.id === action.payload.user.id){
+            if(item.id === action.payload.id){
                 console.log('match');
+
+                console.log(action.payload.id)
                 
-                item.name = action.payload.user.name;
-                item.email = action.payload.user.email;
-                item.phone = action.payload.user.phone;
-                item.website = action.payload.user.website;
+                item.name = action.payload.name;
+                item.email = action.payload.email;
+                item.phone = action.payload.phone;
+                item.website = action.payload.website;
+
+                console.log(item.name,item.email,item.phone,item.website);
                
             }
             else{
                 return null
             }
         })
+
+        
         
        }
 

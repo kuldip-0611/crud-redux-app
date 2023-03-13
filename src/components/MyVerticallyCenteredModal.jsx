@@ -1,35 +1,38 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Form,
-  FormGroup,
-  Label,
-  FormFeedback,
-  FormText,
-  Input,
-} from "reactstrap";
+import { Field, Formik, Form, ErrorMessage, useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { Col } from "reactstrap";
+import * as yup from "yup";
 import { editperticularForm } from "../features/userSlice";
 
 function MyVerticallyCenteredModal(props) {
-  const [user, setUser] = useState({
+  const value = {
     id: props.item.id,
     name: props.item.name,
     email: props.item.email,
     phone: props.item.phone,
     website: props.item.website,
+  };
+
+  const validationSchema = yup.object().shape({
+    name: yup.string().required("please enter your name"),
+    email: yup
+      .string()
+      .required("please enter mail")
+      .email("please enter valid email"),
+    phone: yup.string().required("please enter phone number"),
+    website: yup.string().required("please enter website link"),
   });
 
-  const inputsHandler = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
   const dispatch = useDispatch();
 
-  const editData = ()=>{
-     dispatch(editperticularForm({ user }))
-     {props.onHide()}
-  }
+  const editData = (values) => {
+    dispatch(editperticularForm(values));
+
+    props.onHide();
+  };
   return (
     <>
       <Modal
@@ -44,67 +47,47 @@ function MyVerticallyCenteredModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <FormGroup>
-              <Label className="text-start" for="exampleEmail">
-                Name
-              </Label>
-              <Input
-                id="exampleEmail"
-                name="name"
-                placeholder="with a placeholder"
-                type="text"
-                onChange={inputsHandler}
-                value={user.name}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label className="text-start" for="examplePassword">
-                Email
-              </Label>
-              <Input
-                id="examplePassword"
-                name="email"
-                placeholder="email placeholder"
-                type="email"
-                onChange={inputsHandler}
-                value={user.email}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label className="text-start" for="exampleEmail">
-                Phone
-              </Label>
-              <Input
-                id="exampleEmail"
-                name="phone"
-                placeholder="with a placeholder"
-                type="tel"
-                onChange={inputsHandler}
-                value={user.phone}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label className="text-start" for="exampleEmail">
-                Website Link
-              </Label>
-              <Input
-                id="exampleEmail"
-                name="website"
-                placeholder="with a placeholder"
-                type="text"
-                onChange={inputsHandler}
-                value={user.website}
-              />
-            </FormGroup>
-          </Form>
+          <Formik
+            initialValues={value}
+            validationSchema={validationSchema}
+            onSubmit={editData}
+          >
+            <Form className="w-100">
+              <Col>
+                <lable>Name</lable>
+                <Field type="text" name="name" className="w-100" />
+                <p className="text-danger">
+                  <ErrorMessage name="name" />
+                </p>
+              </Col>
+              <Col>
+                <lable>Email</lable>
+                <Field type="email" name="email" className="w-100" />
+                <p className="text-danger">
+                  <ErrorMessage name="email" />
+                </p>
+              </Col>
+              <Col>
+                <lable>Phone</lable>
+                <Field type="tel" name="phone" className="w-100" />
+                <p className="text-danger">
+                  <ErrorMessage name="phone" />
+                </p>
+              </Col>
+              <Col>
+                <lable>Website</lable>
+                <Field type="text" name="website" className="w-100" />
+                <p className="text-danger">
+                  <ErrorMessage name="website" />
+                </p>
+              </Col>
+              <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+                <Button type="submit">OK</Button>
+              </Modal.Footer>
+            </Form>
+          </Formik>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-          <Button onClick={editData}>
-            OK
-          </Button>
-        </Modal.Footer>
       </Modal>
       {/* ))} */}
     </>
