@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  editperticularForm,
-  fetchUser,
+ 
   removerPerticularUser,
 } from "../features/userSlice";
 
@@ -11,8 +10,8 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
-  Container,
-  Row,
+  
+  
 } from "reactstrap";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
@@ -21,12 +20,20 @@ import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlinePhone } from "react-icons/ai";
 import { AiOutlineLink } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 const CardBox = (props) => {
   const [like, setLike] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
+
+  const handleLike = () => {
+    setLike(prev => !prev)
+  }
+
+  const handleDelete = () => {
+    dispatch(removerPerticularUser(props.item.id));
+  }
 
   return (
     <>
@@ -40,7 +47,7 @@ const CardBox = (props) => {
         <img
           alt="Sample"
           src={`https://avatars.dicebear.com/v2/avataaars/${props.item.username}.svg?options[mood][]=happy`}
-          className='bg-light'
+          className="bg-light"
         />
         <CardBody>
           <CardTitle tag="h5" className="text-start mt-3">
@@ -60,10 +67,17 @@ const CardBox = (props) => {
           </CardSubtitle>
 
           <div className="d-flex justify-content-around mt-4 gap-5 bg-light">
-            <Button onClick={() => setLike(!like)} className='bg-light'>
-              {like === false ? <AiOutlineHeart color="black" /> : <AiFillHeart color="red" />}
+            <Button
+              onClick={handleLike}
+              className="bg-light"
+            >
+              {like ? (
+                <AiFillHeart color="red" />
+              ) : (
+                <AiOutlineHeart color="black" />
+              )}
             </Button>
-            <Button onClick={() => setModalShow(true)} className='bg-light'>
+            <Button onClick={() => setModalShow(true)} className="bg-light">
               <AiFillEdit color="black" />
             </Button>
             <MyVerticallyCenteredModal
@@ -72,8 +86,9 @@ const CardBox = (props) => {
               item={props.item}
             />
 
-            <Button 
-              onClick={() => dispatch(removerPerticularUser(props.item.id))} className='bg-light'
+            <Button
+              onClick={() => handleDelete(props.item.id)}
+              className="bg-light"
             >
               <AiFillDelete color="black" />
             </Button>

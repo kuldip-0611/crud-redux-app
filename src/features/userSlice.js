@@ -12,13 +12,13 @@ const initialState = {
 export const fetchUser = createAsyncThunk('user/fetchuser',()=>{
     return axios.get('https://jsonplaceholder.typicode.com/users')
     .then(res=>res.data)
-
 })
 
 const userSlice = createSlice({
     name:'user',
     initialState,
     reducers:{
+       /* Removing the perticular user from the list. */
        removerPerticularUser:(state,action)=>{
         state.users.map((item,index)=>{
             if(item.id === action.payload){
@@ -27,8 +27,10 @@ const userSlice = createSlice({
             else{
                 console.log('false')
             }
+            return item
         })
        },
+      /* This is the reducer function which is used to edit the perticular user. */
        editperticularForm : (state,action)=>{
 
         
@@ -49,6 +51,7 @@ const userSlice = createSlice({
             else{
                 return null
             }
+            return item
         })
 
         

@@ -5,12 +5,10 @@ import {
   Form,
   FormGroup,
   Label,
-  FormFeedback,
-  FormText,
   Input,
 } from "reactstrap";
 
-const EditForm = ({ NAME, EMAIL, PHONE, WEBSITE }) => {
+const EditForm = () => {
   const individualData = useSelector((state) => {
     return state.user.individualData;
   });
@@ -28,7 +26,7 @@ const EditForm = ({ NAME, EMAIL, PHONE, WEBSITE }) => {
               name="email"
               placeholder="with a placeholder"
               type="text"
-              value={item.NAME}
+              value={item.name}
             />
           </FormGroup>
           <FormGroup>
@@ -40,7 +38,7 @@ const EditForm = ({ NAME, EMAIL, PHONE, WEBSITE }) => {
               name="password"
               placeholder="email placeholder"
               type="email"
-              value={item.EMAIL}
+              value={item.email}
             />
           </FormGroup>
           <FormGroup>
@@ -52,7 +50,7 @@ const EditForm = ({ NAME, EMAIL, PHONE, WEBSITE }) => {
               name="email"
               placeholder="with a placeholder"
               type="tel"
-              value={item.PHONE}
+              value={item.phone}
             />
           </FormGroup>
           <FormGroup>
@@ -64,7 +62,7 @@ const EditForm = ({ NAME, EMAIL, PHONE, WEBSITE }) => {
               name="email"
               placeholder="with a placeholder"
               type="text"
-              value={item.WEBSITE}
+              value={item.website}
             />
           </FormGroup>
         </Form>
